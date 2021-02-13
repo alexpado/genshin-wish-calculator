@@ -143,8 +143,9 @@ export default new Vuex.Store({
             max += getters.monthUntilPull * 5;
             return Math.min(amount, max);
         },
-        wishesTotal             : (_, getters) => {
+        wishesTotal             : (state, getters) => {
             let amount = 0;
+            amount += state.form.belongings.intertwined;
             amount += getters.wishesFromPrimogems;
             amount += getters.wishesFromStarglitter;
             amount += getters.wishesFromStardust;
