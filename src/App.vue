@@ -405,35 +405,29 @@ body {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: thin; /* Firefox */
     scrollbar-color: #ff5100 #262626;
-}
 
-.scrollable::-webkit-scrollbar {
-    display: block;
-    background-color: #262626;
-    width: 8px;
-}
+    &::-webkit-scrollbar {
+        display: block;
+        background-color: #262626;
+        width: 8px;
+    }
 
-.scrollable::-webkit-scrollbar-thumb {
-    background-color: #ff5100;
-    border: 1px solid #262626;
+    &::-webkit-scrollbar-thumb {
+        background-color: #ff5100;
+        border: 1px solid #262626;
+    }
 }
-
 
 .input-grid {
     display: flex;
     justify-content: space-around;
     flex-flow: row wrap;
-}
 
-.input-grid .input {
-    flex-basis: 48%;
-    padding: 4px 0;
-    box-sizing: border-box;
-}
-
-.input-column .input {
-    padding: 4px;
-    box-sizing: content-box;
+    .input {
+        flex-basis: 48%;
+        padding: 4px 0;
+        box-sizing: border-box;
+    }
 }
 
 hr {
@@ -442,58 +436,6 @@ hr {
     width: 20%;
     border: none;
     margin: 16px auto;
-}
-
-table {
-    border-spacing: 0;
-}
-
-table, tr {
-    width: 100%;
-}
-
-tr:hover {
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
-table tr td {
-    width: 50%;
-    padding: 0.4em 0;
-}
-
-table tr td span {
-    display: block;
-    padding: 0 0.5em;
-    font-size: 0.85em;
-    cursor: default;
-}
-
-tr.white {
-    color: white;
-}
-
-tr.orange {
-    color: #ff5100;
-}
-
-tr.yellow {
-    color: #ffc800;
-}
-
-tr.purple {
-    color: #b300ff;
-}
-
-table tr td:first-child {
-    text-align: right;
-}
-
-table tr td:first-child span {
-    border-right: 1px solid #FF5100;
-}
-
-table tr td:last-child span {
-    border-left: 1px solid #FF5100;
 }
 
 /* Chrome, Safari, Edge, Opera */

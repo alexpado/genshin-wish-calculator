@@ -54,6 +54,9 @@ export default {
         starglitter() {
             return this.$store.getters.playerStarglitter;
         },
+        intertwined() {
+            return this.$store.state.form.belongings.intertwined
+        },
         currency() {
             return this.$store.state.packs.currency;
         },
@@ -210,6 +213,57 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+table {
+    border-spacing: 0;
+    width: 100%;
 
+    tr {
+        width: 100%;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        td {
+            width: 50%;
+            padding: 0.4em 0;
+
+            span {
+                display: block;
+                padding: 0 0.5em;
+                font-size: 0.85em;
+                cursor: default;
+            }
+
+            &:first-child {
+                text-align: right;
+            }
+
+            &:first-child span {
+                border-right: 1px solid #FF5100;
+            }
+
+            &:last-child span {
+                border-left: 1px solid #FF5100;
+            }
+        }
+
+        &.white {
+            color: white;
+        }
+
+        &.orange {
+            color: #ff5100;
+        }
+
+        &.yellow {
+            color: #ffc800;
+        }
+
+        &.purple {
+            color: #b300ff;
+        }
+    }
+}
 </style>
