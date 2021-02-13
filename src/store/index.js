@@ -85,7 +85,7 @@ export default new Vuex.Store({
         },
         starglitterFromPity     : () => pity => {
             return {
-                min: Math.max((Math.floor(pity.min.four - 3) * 2) + (Math.floor(pity.min.five) * 10), 0),
+                min: Math.max((Math.floor(pity.min.four) * 2) + (Math.floor(pity.min.five) * 10), 0),
                 max: (Math.floor(pity.max.four) * 5) + (Math.floor(pity.max.five) * 25)
             }
         },
@@ -143,8 +143,9 @@ export default new Vuex.Store({
             max += getters.monthUntilPull * 5;
             return Math.min(amount, max);
         },
-        wishesTotal             : (_, getters) => {
+        wishesTotal             : (state, getters) => {
             let amount = 0;
+            amount += state.form.belongings.intertwined;
             amount += getters.wishesFromPrimogems;
             amount += getters.wishesFromStarglitter;
             amount += getters.wishesFromStardust;
@@ -283,7 +284,7 @@ export default new Vuex.Store({
             state.form.settings.injectStarglitter = b;
         },
         packs(state, {pack, n}) {
-            state.packs[pack] = n;
+            state.form.packs[pack] = n;
         }
     },
     actions  : {},
