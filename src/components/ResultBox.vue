@@ -108,6 +108,11 @@ export default {
                     classes: ['purple']
                 },
                 {
+                    name   : 'Max Hard Pity 4*',
+                    value  : this.toNumber(injection.pity.max.max.four),
+                    classes: ['purple']
+                },
+                {
                     name   : 'Min Hard Pity 5*',
                     value  : this.toNumber(injection.pity.min.min.five),
                     classes: ['orange']
