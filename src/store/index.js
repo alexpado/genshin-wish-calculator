@@ -85,7 +85,7 @@ export default new Vuex.Store({
         },
         starglitterFromPity     : () => pity => {
             return {
-                min: Math.max((Math.floor(pity.min.four - 3) * 2) + (Math.floor(pity.min.five) * 10), 0),
+                min: Math.max((Math.floor(pity.min.four) * 2) + (Math.floor(pity.min.five) * 10), 0),
                 max: (Math.floor(pity.max.four) * 5) + (Math.floor(pity.max.five) * 25)
             }
         },
