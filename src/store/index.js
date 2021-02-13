@@ -283,7 +283,7 @@ export default new Vuex.Store({
             state.form.settings.injectStarglitter = b;
         },
         packs(state, {pack, n}) {
-            state.packs[pack] = n;
+            state.form.packs[pack] = n;
         }
     },
     actions  : {},
