@@ -57,6 +57,9 @@ export default {
         intertwined() {
             return this.$store.state.form.belongings.intertwined
         },
+        injectionEnabled() {
+            return this.$store.state.form.settings.injectStarglitter;
+        },
         currency() {
             return this.$store.state.packs.currency;
         },
@@ -64,139 +67,199 @@ export default {
         results() {
             const injection = this.$store.getters.inject(this.pity, this.starglitter);
 
-            return [
+            const result = [
                 {
                     name   : 'Total Wishes',
                     value  : this.wishesTotal,
+                    raw    : this.wishesTotal,
                     classes: ['white']
                 },
                 {
                     name   : 'Hard Pity 4*',
                     value  : this.toNumber(this.pity.min.four),
+                    raw    : this.pity.min.four,
                     classes: ['purple']
                 },
                 {
                     name   : 'Hard Pity 5*',
                     value  : this.toNumber(this.pity.min.five),
+                    raw    : this.pity.min.five,
                     classes: ['orange']
                 },
                 {
                     name   : 'Soft Pity 5*',
                     value  : this.toNumber(this.pity.min.five),
+                    raw    : this.pity.min.five,
                     classes: ['yellow']
                 },
                 {
                     name : 'Min Starglitter',
-                    value: `+ ${this.starglitter.min}`
+                    value: `+ ${this.starglitter.min}`,
+                    raw  : this.starglitter.min
                 },
                 {
                     name : 'Max Starglitter',
-                    value: `+ ${this.starglitter.max}`
+                    value: `+ ${this.starglitter.max}`,
+                    raw  : this.starglitter.max
                 },
                 {},
                 {
-                    name : 'Min Starglitter Wishes',
-                    value: injection.wishes.min
+                    name     : 'Min Starglitter Wishes',
+                    value    : injection.wishes.min,
+                    raw      : injection.wishes.min,
+                    condition: () => this.injectionEnabled
                 },
                 {
-                    name : 'Max Starglitter Wishes',
-                    value: injection.wishes.max
+                    name     : 'Max Starglitter Wishes',
+                    value    : injection.wishes.max,
+                    raw      : injection.wishes.max,
+                    condition: () => this.injectionEnabled
                 },
                 {
-                    name   : 'Min Hard Pity 4*',
-                    value  : this.toNumber(injection.pity.min.min.four),
-                    classes: ['purple']
+                    name     : 'Min Hard Pity 4*',
+                    value    : this.toNumber(injection.pity.min.min.four),
+                    raw      : injection.pity.min.min.four,
+                    classes  : ['purple'],
+                    condition: () => this.injectionEnabled
                 },
                 {
-                    name   : 'Max Hard Pity 4*',
-                    value  : this.toNumber(injection.pity.max.max.four),
-                    classes: ['purple']
+                    name     : 'Max Hard Pity 4*',
+                    value    : this.toNumber(injection.pity.max.max.four),
+                    raw      : injection.pity.max.max.four,
+                    classes  : ['purple'],
+                    condition: () => this.injectionEnabled
                 },
                 {
-                    name   : 'Min Hard Pity 5*',
-                    value  : this.toNumber(injection.pity.min.min.five),
-                    classes: ['orange']
+                    name     : 'Min Hard Pity 5*',
+                    value    : this.toNumber(injection.pity.min.min.five),
+                    raw      : injection.pity.min.min.five,
+                    classes  : ['orange'],
+                    condition: () => this.injectionEnabled
                 },
                 {
-                    name   : 'Max Hard Pity 5*',
-                    value  : this.toNumber(injection.pity.max.min.five),
-                    classes: ['orange']
+                    name     : 'Max Hard Pity 5*',
+                    value    : this.toNumber(injection.pity.max.min.five),
+                    raw      : injection.pity.max.min.five,
+                    classes  : ['orange'],
+                    condition: () => this.injectionEnabled
                 },
                 {
-                    name   : 'Min Soft Pity 5*',
-                    value  : this.toNumber(injection.pity.min.max.five),
-                    classes: ['yellow']
+                    name     : 'Min Soft Pity 5*',
+                    value    : this.toNumber(injection.pity.min.max.five),
+                    raw      : injection.pity.min.max.five,
+                    classes  : ['yellow'],
+                    condition: () => this.injectionEnabled
                 },
                 {
-                    name   : 'Max Soft Pity 5*',
-                    value  : this.toNumber(injection.pity.max.max.five),
-                    classes: ['yellow']
+                    name     : 'Max Soft Pity 5*',
+                    value    : this.toNumber(injection.pity.max.max.five),
+                    raw      : injection.pity.max.max.five,
+                    classes  : ['yellow'],
+                    condition: () => this.injectionEnabled
                 },
                 {
-                    name : 'Min Starglitter Left',
-                    value: injection.starglitter.min
+                    name     : 'Min Starglitter Left',
+                    value    : injection.starglitter.min,
+                    raw      : injection.starglitter.min,
+                    condition: () => this.injectionEnabled
                 },
                 {
-                    name : 'Max Starglitter Left',
-                    value: injection.starglitter.min
-                },
-                {},
-                {
-                    name : 'Owned',
-                    value: `${this.primogems} primogems`
-                },
-                {
-                    name : 'Daily Commissions',
-                    value: `${this.primogemsFromCommissions} primogems`
-                },
-                {
-                    name : 'Welkin Moon',
-                    value: `${this.primogemsFromWelkinMoon} primogems`
-                },
-                {
-                    name : 'Crystal Exchange',
-                    value: `${this.primogemsFromCrystals} primogems`
-                },
-                {
-                    name : 'Pack Purchase',
-                    value: `${this.primogemsFromPacks} primogems`
-                },
-                {
-                    name : 'Money Spent',
-                    value: this.toCurrency(this.moneySpentInPacks)
-                },
-                {
-                    name   : 'Total Primogems',
-                    value  : `${this.primogemsAvailable} primogems`,
-                    classes: ['white']
-                },
-                {
-                    name : 'Left After Pulls',
-                    value: `${this.primogemsLeft} primogems`
+                    name     : 'Max Starglitter Left',
+                    value    : injection.starglitter.min,
+                    raw      : injection.starglitter.min,
+                    condition: () => this.injectionEnabled
                 },
                 {},
                 {
-                    name : 'Owned',
-                    value: `${this.intertwined} wishes`
+                    name     : 'Owned',
+                    value    : `${this.primogems} primogems`,
+                    raw      : this.primogems,
+                    condition: (v) => v > 0
                 },
                 {
-                    name : 'Primogems Exchange',
-                    value: `${this.wishesFromPrimogems} wishes`
+                    name     : 'Daily Commissions',
+                    value    : `${this.primogemsFromCommissions} primogems`,
+                    raw      : this.primogemsFromCommissions,
+                    condition: (v) => v > 0
                 },
                 {
-                    name : 'Starglitter Exchange',
-                    value: `${this.wishesFromStarglitter} wishes`,
+                    name     : 'Welkin Moon',
+                    value    : `${this.primogemsFromWelkinMoon} primogems`,
+                    raw      : this.primogemsFromWelkinMoon,
+                    condition: (v) => v > 0
                 },
                 {
-                    name : 'Stardust Exchange',
-                    value: `${this.wishesFromStardust} wishes`
+                    name     : 'Crystal Exchange',
+                    value    : `${this.primogemsFromCrystals} primogems`,
+                    raw      : this.primogemsFromCrystals,
+                    condition: (v) => v > 0
                 },
                 {
-                    name   : 'Total Wishes',
-                    value  : `${this.wishesTotal} wishes`,
-                    classes: ['white']
+                    name     : 'Pack Purchase',
+                    value    : `${this.primogemsFromPacks} primogems`,
+                    raw      : this.primogemsFromPacks,
+                    condition: (v) => v > 0
+                },
+                {
+                    name     : 'Money Spent',
+                    value    : this.toCurrency(this.moneySpentInPacks),
+                    raw      : this.moneySpentInPacks,
+                    condition: (v) => v > 0
+                },
+                {
+                    name     : 'Total Primogems',
+                    value    : `${this.primogemsAvailable} primogems`,
+                    raw      : this.primogemsAvailable,
+                    classes  : ['white'],
+                    condition: (v) => v > 0
+                },
+                {
+                    name     : 'Left After Pulls',
+                    value    : `${this.primogemsLeft} primogems`,
+                    raw      : this.primogemsLeft,
+                    condition: (v) => v > 0
+                },
+                {},
+                {
+                    name     : 'Owned',
+                    value    : `${this.intertwined} wishes`,
+                    raw      : this.intertwined,
+                    condition: (v) => v > 0
+                },
+                {
+                    name     : 'Primogems Exchange',
+                    value    : `${this.wishesFromPrimogems} wishes`,
+                    raw      : this.wishesFromPrimogems,
+                    condition: (v) => v > 0
+                },
+                {
+                    name     : 'Starglitter Exchange',
+                    value    : `${this.wishesFromStarglitter} wishes`,
+                    raw      : this.wishesFromStarglitter,
+                    condition: (v) => v > 0
+                },
+                {
+                    name     : 'Stardust Exchange',
+                    value    : `${this.wishesFromStardust} wishes`,
+                    raw      : this.wishesFromStardust,
+                    condition: (v) => v > 0
+                },
+                {
+                    name     : 'Total Wishes',
+                    value    : `${this.wishesTotal} wishes`,
+                    raw      : this.wishesTotal,
+                    classes  : ['white'],
+                    condition: (v) => v > 0
                 }
             ];
+
+            return result.filter(i => {
+                // eslint-disable-next-line no-prototype-builtins
+                if (i.hasOwnProperty('condition')) {
+                    return i.condition(i.raw);
+                }
+                return true;
+            });
         }
     },
     methods : {
