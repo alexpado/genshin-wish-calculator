@@ -49,10 +49,58 @@ export default new Vuex.Store({
                 pack4: 0,
                 pack5: 0,
                 pack6: 0,
+            },
+            banner    : 'character'
+        },
+        vars : {
+            banner: {
+                character: {
+                    display        : 'Character Banner',
+                    hard           : 90,
+                    soft           : 75,
+                    minmax         : true,
+                    starglitterMeta: {
+                        min: {
+                            four: 2,
+                            five: 10
+                        },
+                        max: {
+                            four: 5,
+                            five: 25
+                        }
+                    }
+                },
+                weapon   : {
+                    display        : 'Weapon Banner',
+                    hard           : 80,
+                    soft           : 65,
+                    minMax         : false,
+                    starglitterMeta: {
+                        min: {
+                            four: 2,
+                            five: 10
+                        },
+                        max: {
+                            four: 2,
+                            five: 10
+                        }
+                    }
+                }
             }
         }
     },
     getters  : {
+        availableBanner         : state => {
+            return Object.keys(state.vars.banner).map(key => {
+                return {
+                    key  : key,
+                    label: state.vars.banner[key].display
+                }
+            });
+        },
+        activeBanner            : state => {
+            return state.vars.banner[state.form.banner];
+        },
         monthUntilPull          : state => {
             const date = new Date();
 
@@ -70,23 +118,34 @@ export default new Vuex.Store({
 
             return 12 * (end.year - start.year) + (end.month - start.month);
         },
-        pity                    : () => (wishes, pity) => {
+        pity                    : (_, getters) => (wishes, pity) => {
             const effectivePity = pity || 0;
             return {
                 min: {
                     four: (wishes + (effectivePity % 10)) / 10,
-                    five: (wishes + (effectivePity % 90)) / 90
+                    five: (wishes + (effectivePity % getters.activeBanner.hard)) / getters.activeBanner.hard
                 },
                 max: {
                     four: (wishes + (effectivePity % 10)) / 10,
-                    five: (wishes + (effectivePity)) / 75
+                    five: (wishes + (effectivePity % getters.activeBanner.soft)) / getters.activeBanner.soft
                 }
             }
         },
-        starglitterFromPity     : () => pity => {
+        starglitterFromPity     : (_, getters) => pity => {
+            const minMeta           = getters.activeBanner.starglitterMeta.min;
+            const maxMeta           = getters.activeBanner.starglitterMeta.max;
+            const minFour           = Math.floor(pity.min.four);
+            const minFive           = Math.floor(pity.min.five);
+            const maxFour           = Math.floor(pity.max.four);
+            const maxFive           = Math.floor(pity.max.five);
+            const minFourMultiplier = minMeta.four;
+            const minFiveMultiplier = minMeta.five;
+            const maxFourMultiplier = maxMeta.four;
+            const maxFiveMultiplier = maxMeta.five;
+
             return {
-                min: Math.max((Math.floor(pity.min.four) * 2) + (Math.floor(pity.min.five) * 10), 0),
-                max: (Math.floor(pity.max.four) * 5) + (Math.floor(pity.max.five) * 25)
+                min: Math.floor(minFour * minFourMultiplier) + Math.floor(minFive * minFiveMultiplier),
+                max: Math.floor(maxFour * maxFourMultiplier) + Math.floor(maxFive * maxFiveMultiplier)
             }
         },
         primogems               : state => {
@@ -253,6 +312,9 @@ export default new Vuex.Store({
         }
     },
     mutations: {
+        banner(state, s) {
+            state.form.banner = s;
+        },
         intertwined(state, n) {
             state.form.belongings.intertwined = n;
         },
