@@ -91,8 +91,8 @@ export default {
         },
         {
           name   : 'Soft Pity 5*',
-          value  : this.toNumber(this.pity.min.five),
-          raw    : this.pity.min.five,
+          value  : this.toNumber(this.pity.max.five),
+          raw    : this.pity.max.five,
           classes: ['yellow']
         },
         {
