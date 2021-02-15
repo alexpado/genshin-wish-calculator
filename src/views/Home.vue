@@ -1,5 +1,10 @@
 <template>
     <div class="scrollable">
+        <div id="banner" class="input-full">
+            <div class="input">
+                <Dropdown v-model="formBanner" :items="banners" label="Banner"/>
+            </div>
+        </div>
         <div id="belongings" class="input-grid">
             <div class="input">
                 <NumericInputIcon
@@ -155,12 +160,27 @@ import NumericInputToggle                        from "@/components/inputs/Numer
 import Checkbox                                  from "@/components/inputs/Checkbox";
 import ResultBox                                 from "@/components/ResultBox";
 import {GithubIcon, HelpCircleIcon, TwitterIcon} from 'vue-feather-icons'
+import Dropdown                                  from "@/components/inputs/Dropdown";
 
 export default {
     name      : 'Home',
-    components: {ResultBox, Checkbox, NumericInputToggle, NumericInputIcon, GithubIcon, TwitterIcon, HelpCircleIcon},
+    components: {
+        Dropdown,
+        ResultBox, Checkbox, NumericInputToggle, NumericInputIcon, GithubIcon, TwitterIcon, HelpCircleIcon
+    },
     computed  : {
+        banners() {
+            return this.$store.getters.availableBanner;
+        },
         // ** <editor-fold desc="Form Properties">
+        formBanner           : {
+            get() {
+                return this.$store.state.form.banner
+            },
+            set(v) {
+                this.$store.commit('banner', v);
+            }
+        },
         formIntertwined      : {
             get() {
                 return this.$store.state.form.belongings.intertwined;
@@ -355,6 +375,18 @@ export default {
 
     .input {
         flex-basis: 48%;
+        padding: 4px 0;
+        box-sizing: border-box;
+    }
+}
+
+.input-full {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row wrap;
+
+    .input {
+        flex-basis: 98%;
         padding: 4px 0;
         box-sizing: border-box;
     }

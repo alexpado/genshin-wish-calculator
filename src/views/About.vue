@@ -11,11 +11,14 @@
             <div class="content">
                 <p>
                     This is the help and information section. Here you can see how this tool is working and how to use
-                    it.
+                    it (there is a lot to read, sorry).
                 </p>
                 <p>
-                    If you have any question, feature request or bug report, do not hesitate to contact me through
-                    Twitter or GitHub.
+                    If you have any questions, feature request or bug report, do not hesitate to contact me through
+                    <a class="yellow" href="https://twitter.com/alexpado08" target="_blank">Twitter</a>,
+                    <a class="yellow" href="https://github.com/alexpado/genshin-wish-calculator"
+                       target="_blank">Github</a>,
+                    or Discord (<span class="orange">Akio Nakao#0001</span>).
                 </p>
             </div>
         </div>
@@ -30,11 +33,51 @@
                 <p>
                     For example, if you have <span class="orange">{{ toNumber(0.75) }}</span> as pity, it doesn't mean
                     that you have <span class="orange">75%</span> chances to get your pity at the next pull, but rather
-                    that you need still <span class="yellow">25%</span> to get to the pity.
+                    that you need still <span class="orange">25%</span> to get to the pity.
                 </p>
                 <p>
                     In other words:
                     <span class="white">The pity displayed here is linear, the probabilities aren't.</span>
+                </p>
+                <p>
+                    If you are interested in the details, you may want to look at
+                    <a class="yellow"
+                       href="https://www.reddit.com/r/Genshin_Impact/comments/jod9o4/whale_watching_logs_2_the_blue_whale/"
+                       target="_blank">this reddit post.
+                    </a>
+                </p>
+            </div>
+        </div>
+        <hr>
+        <div class="section">
+            <h2>About the starglitters</h2>
+            <div class="content">
+                <p>
+                    The starglitters amount obtained from pulling is approximate: while pulling, you can obtain 4*
+                    characters and weapons, but there is a catch.
+                </p>
+                <p>
+                    To have a precise number, it would have been necessary to input <span class="white">every</span>
+                    characters you have with their constellations and a lot of probabilities calculation would need to
+                    be done. It's getting even worse when it comes to the weapon banner. You can refer to the reddit
+                    post
+                    linked in the "About the pity" section.
+                </p>
+                <p>
+                    As you may guess, it would add more work on both side (and unfortunately, I'm a little bit lazy),
+                    and this tool is meant to help you quickly see if you need to save a lot of primogems or buy packs,
+                    not to be precise.
+                </p>
+                <p>
+                    <span class="orange">For the character banner:</span> For the minimum amount, it is assumed that
+                    each 4* and 5* pulls are a duplicated character (without reaching the maximum constellation, for the
+                    same reason as above). For the maximum amount, it is assumed that each 4* and 5* pulls are a
+                    duplicated character at max constellation.
+                </p>
+                <p>
+                    <span class="orange">For the weapon banner:</span> There is almost no differences with the character
+                    banner. Everything is done in a similar way, but as min and max values are the same, results are
+                    displayed only once.
                 </p>
             </div>
         </div>
